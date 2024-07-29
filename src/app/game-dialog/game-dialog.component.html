@@ -1,0 +1,18 @@
+<mat-form-field>
+    <mat-label>
+        Choose Category
+    </mat-label>
+    <mat-select>
+        <mat-option *ngFor="let category of categories"  class ="game-card">
+        </mat-option>
+    </mat-select>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button"(click)="play()">play</button>
+    <button class="mat-raised-button"(click)="close()">close</button>
+</mat-dialog-actions>
+
+</mat-form-field>
+
+<!-- <button>play</button> -->
+

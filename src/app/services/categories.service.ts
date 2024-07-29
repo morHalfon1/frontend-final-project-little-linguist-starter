@@ -1,6 +1,7 @@
 import { categories } from './../../shared/data/categories';
 import { Injectable } from '@angular/core';
 import { Category } from '../../shared/model/category';
+import { Language } from '../../shared/model/language';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,10 @@ import { Category } from '../../shared/model/category';
 export class CategoriesService {
   private readonly CATEGORIES_KEY = 'categories';
   private readonly NEXT_ID_KEY = 'nextId';
+
+  public Categories: Category[] = [
+    new Category(1, "Colors", Language.English, Language.English)
+  ]
 
   private getCategories() : Map<number, Category>{
     let categoriesString = localStorage.getItem(this.CATEGORIES_KEY);
