@@ -10,10 +10,20 @@ export class CategoriesService {
   private readonly CATEGORIES_KEY = 'categories';
   private readonly NEXT_ID_KEY = 'nextId';
 
-  public Categories: Category[] = [
+  private categories: Category[] = [
     new Category(1, 'Colors', Language.English, Language.English),
+    new Category(2, 'animals', Language.English, Language.English),
+    new Category(3, 'food', Language.English, Language.English),
   ];
   open: any;
+
+    constructor() { }
+
+    list() : Category[] {
+      return this.categories;
+    }
+     
+
 
   private getCategories(): Map<number, Category> {
     let categoriesString = localStorage.getItem(this.CATEGORIES_KEY);
@@ -39,9 +49,9 @@ export class CategoriesService {
     localStorage.setItem(this.NEXT_ID_KEY, id.toString());
   }
 
-  list(): Category[] {
-    return Array.from(this.getCategories().values());
-  }
+  // list(): Category[] {
+  //   return Array.from(this.getCategories().values());
+  // }
 
   get(id: number): Category | undefined {
     return this.getCategories().get(id);
@@ -73,3 +83,4 @@ export class CategoriesService {
     this.setNextId(++category.id);
   }
 }
+
