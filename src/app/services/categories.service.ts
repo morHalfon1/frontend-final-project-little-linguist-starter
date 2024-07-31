@@ -4,17 +4,18 @@ import { Category } from '../../shared/model/category';
 import { Language } from '../../shared/model/language';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoriesService {
   private readonly CATEGORIES_KEY = 'categories';
   private readonly NEXT_ID_KEY = 'nextId';
 
   public Categories: Category[] = [
-    new Category(1, "Colors", Language.English, Language.English)
-  ]
+    new Category(1, 'Colors', Language.English, Language.English),
+  ];
+  open: any;
 
-  private getCategories() : Map<number, Category>{
+  private getCategories(): Map<number, Category> {
     let categoriesString = localStorage.getItem(this.CATEGORIES_KEY);
 
     if (!categoriesString) {
@@ -24,35 +25,35 @@ export class CategoriesService {
     }
   }
 
-  private getNextId() : number {
-    let nextIdString = localStorage.getItem(this.NEXT_ID_KEY); 
+  private getNextId(): number {
+    let nextIdString = localStorage.getItem(this.NEXT_ID_KEY);
 
     return nextIdString ? parseInt(nextIdString) : 0;
   }
 
-  private setCategories(list : Map<number, Category>) : void {
+  private setCategories(list: Map<number, Category>): void {
     localStorage.setItem(this.CATEGORIES_KEY, JSON.stringify(Array.from(list)));
   }
 
-  private setNextId(id : number) : void {
+  private setNextId(id: number): void {
     localStorage.setItem(this.NEXT_ID_KEY, id.toString());
   }
 
-  list() : Category[] {
+  list(): Category[] {
     return Array.from(this.getCategories().values());
   }
 
-  get(id : number) : Category | undefined {
+  get(id: number): Category | undefined {
     return this.getCategories().get(id);
   }
 
-  delete(id : number) : void {
+  delete(id: number): void {
     let categoriesMap = this.getCategories();
     categoriesMap.delete(id);
     this.setCategories(categoriesMap);
   }
 
-  update(category : Category) : void {
+  update(category: Category): void {
     let categoriesMap = this.getCategories();
 
     category.lastUpdateDate = new Date();
@@ -61,7 +62,7 @@ export class CategoriesService {
     this.setCategories(categoriesMap);
   }
 
-  add(category : Category) : void {
+  add(category: Category): void {
     category.id = this.getNextId();
     category.lastUpdateDate = new Date();
 
