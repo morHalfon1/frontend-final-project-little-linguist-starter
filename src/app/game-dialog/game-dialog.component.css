@@ -1,0 +1,30 @@
+/* game-dialog.component.css */
+
+mat-dialog-content {
+    padding: 24px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  
+  mat-select {
+    width: 100%;
+  }
+  
+  mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px;
+  }
+  
+  button {
+    margin-left: 8px;
+  }
+  
+  /* Optional: Style for better visual feedback */
+  button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  

@@ -1,23 +1,42 @@
-<mat-dialog-content>
-<mat-form-field>
-    <mat-label>
-        Choose Category
-    </mat-label>
-    <mat-select>
-        <mat-option *ngFor="let category of categories"  class ="game-card" [value]="category">
-            {{category.name}}
-        </mat-option>
+<!-- <mat-dialog-content>
+  <mat-form-field>
+    <mat-label> Choose Category </mat-label>
+    <mat-select [(ngModel)]="selectCategory">
+      <mat-option
+        *ngFor="let category of categories"
+        class="game-card"
+        [value]="category"
+      >
+        {{ category.name }}
+      </mat-option>
     </mat-select>
-</mat-form-field>
+  </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button (click)="play()">play</button>
-    <button mat-raised-button (click)="close()">close</button>
+  <button mat-raised-button (click)="play()" [disabled] ="!selectCategory" >
+    play
+  </button>
+</mat-dialog-actions> -->
+
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Choose Category</mat-label>
+    <mat-select (selectionChange)="onCategoryChange($event.value)">
+      <mat-option *ngFor="let category of categories" [value]="category">
+        {{ category.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <div *ngIf="selectCategory">
+    <p>Last Update Date:{{ selectCategory.lastUpdateDate | date }}</p>
+    <p>Number of Words:{{ selectCategory.words.length }}</p>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button (click)="play()" [disabled]="!selectCategory">
+    Play
+  </button>
 </mat-dialog-actions>
-
-
-<!-- <button>play</button> -->
-
-
-
 

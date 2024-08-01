@@ -11,7 +11,7 @@ export class GamesService {
   ];
 
   constructor() {}
-  list(): GameProfile[]{
+  list(): GameProfile[] {
     return this.game;
   }
 }
