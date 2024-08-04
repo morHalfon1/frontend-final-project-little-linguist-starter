@@ -22,6 +22,7 @@ import { Game1Component } from '../game1/game1.component';
 import { Game2Component } from '../game2/game2.component';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-game-dialog',
   standalone: true,
@@ -51,7 +52,8 @@ export class GameDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: GameProfile,
     private categoriesService: CategoriesService,
     private router: Router,
-    private dialogRef: MatDialogRef<GameDialogComponent>
+    private dialogRef: MatDialogRef<GameDialogComponent>,
+    
   ) {
     console.log(this.data);
   }
@@ -62,10 +64,15 @@ export class GameDialogComponent implements OnInit {
   onCategoryChange(category: Category): void {
     this.selectCategory = category;
     console.log('Selected category:', category);
+    this.categoriesService.setSelectedCategory(this.selectCategory);
   }
 
   play(): void {
     console.log(this.data.url);
+    // if (this.selectCategory) {
+    //   this.categoriesService.setSelectedCategory(this.selectCategory); 
+    //   console.log(this.selectCategory);
+      // Set the selected category in the shared service
     this.dialogRef.close();
     this.router.navigate([this.data.url]);
   }

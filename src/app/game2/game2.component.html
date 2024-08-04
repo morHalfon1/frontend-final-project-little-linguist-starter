@@ -1,1 +1,8 @@
 <p>game2 works!</p>
+<div *ngIf="selectCategory">
+    <h1>Selected Category: {{ selectCategory.name}}</h1>
+  </div>
+  <div *ngIf="!selectCategory">
+    <h1>No Category Selected</h1>
+  </div>
+  
