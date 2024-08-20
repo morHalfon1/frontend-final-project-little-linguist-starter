@@ -1,4 +1,3 @@
-
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Category } from '../../shared/model/category';
@@ -22,4 +21,3 @@ export class Game2Component {
     console.log('Selected category in game:', this.selectCategory);
   }
 }
-

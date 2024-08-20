@@ -6,5 +6,30 @@
     <h1>No Category Selected</h1>
   </div>
   
+ <div class="exit">
+  <app-exit-button></app-exit-button>
+  </div>
+  <div class="coins">
+  <app-coins-button></app-coins-button>
+  </div>
+  <button>reset </button>
   
- 
+  <button>submit </button>
+
+  
+
+
+  <mat-form-field>
+    <mat-label>enter your guess</mat-label>
+    <input matInput>
+  </mat-form-field>
+
+  <mat-progress-bar
+  mode="determinate"
+  [value]="progress"
+  color="primary">
+</mat-progress-bar>
+
+
+
+<button (click)="onCorrectAnswer()">Correct Answer</button>

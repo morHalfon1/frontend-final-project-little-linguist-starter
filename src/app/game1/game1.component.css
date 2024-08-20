@@ -35,3 +35,42 @@ h2 {
   font-size: 20px;
   margin: 0;
 }
+.button-container {
+  position: relative;
+  width: 100%;
+  height: 200px; /* ניתן לשנות בהתאם לצורך */
+  border: 1px solid #ccc;
+}
+
+.exit {
+  position: absolute;
+  top: 100px;
+  left: 0; 
+  padding: 10px 20px;
+  background-color: #007bff; 
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.coins {
+  position: absolute;
+  top: 100px;
+  right: 0; 
+  padding: 10px 20px;
+  background-color: #007bff; 
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.exit:hover {
+  background-color: white;
+}
+
+.coins:hover {
+  background-color: #0056b3;
+}
+
