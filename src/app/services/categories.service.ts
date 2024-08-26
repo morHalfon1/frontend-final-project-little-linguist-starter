@@ -86,6 +86,7 @@
 import { Injectable } from '@angular/core';
 import { Category } from '../../shared/model/category';
 import { Language } from '../../shared/model/language';
+import { TranslatedWord } from '../../shared/model/translated-word';
 
 @Injectable({
   providedIn: 'root',
@@ -101,7 +102,45 @@ export class CategoriesService {
     new Category(3, 'Food', Language.English, Language.English),
   ];
 
-  constructor() {}
+
+  constructor() {
+    this.addTranslatedWordsColors();
+    this.addTranslatedWordsAnimals();
+    this.addTranslatedWordsFood();
+  }
+
+  addTranslatedWordsColors(){
+    let words:TranslatedWord[] = [
+           new TranslatedWord('אדום', "RED"),
+           new TranslatedWord('שחור', "BLACK"),
+           new TranslatedWord('כחול', "BLUE"),
+           new TranslatedWord('צהוב', "YELLOW")
+    ]
+
+    this.categories[0].words = words;
+  }
+
+  addTranslatedWordsAnimals(){
+    let words:TranslatedWord[] = [
+           new TranslatedWord('כלב', "DOG"),
+           new TranslatedWord('חתול', "CAT"),
+           new TranslatedWord('דג', "FISH"),
+           new TranslatedWord('סוס', "HORSE")
+    ]
+
+    this.categories[1].words = words;
+  }
+
+  addTranslatedWordsFood(){
+    let words:TranslatedWord[] = [
+           new TranslatedWord('ציפס', "CHIPS"),
+           new TranslatedWord('פיצה', "PIZZA"),
+           new TranslatedWord('לחם', "BREAD"),
+           new TranslatedWord('גבינה', "CHEESE")
+    ]
+
+    this.categories[2].words = words;
+  }
 
   list(): Category[] {
     return this.categories;

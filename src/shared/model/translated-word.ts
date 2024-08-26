@@ -6,4 +6,8 @@ export class TranslatedWord {
         {
             this.guess=""
         }
+        
+    isMatch(){
+        return this.target.toLowerCase() === this.guess.toLowerCase();
+    }    
 }

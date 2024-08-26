@@ -2,7 +2,6 @@
   display: block;
 }
 
-
 .container {
   width: 90%;
   max-width: 600px;
@@ -35,19 +34,26 @@ h2 {
   font-size: 20px;
   margin: 0;
 }
+h1 {
+  color: #333333;
+  font-size: 40px;
+  margin: 70px;
+  padding: 16px;
+}
+
 .button-container {
   position: relative;
   width: 100%;
-  height: 200px; /* ניתן לשנות בהתאם לצורך */
+  height: 200px;
   border: 1px solid #ccc;
 }
 
 .exit {
   position: absolute;
   top: 100px;
-  left: 0; 
+  left: 0;
   padding: 10px 20px;
-  background-color: #007bff; 
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -57,9 +63,9 @@ h2 {
 .coins {
   position: absolute;
   top: 100px;
-  right: 0; 
+  right: 0;
   padding: 10px 20px;
-  background-color: #007bff; 
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -73,4 +79,3 @@ h2 {
 .coins:hover {
   background-color: #0056b3;
 }
-

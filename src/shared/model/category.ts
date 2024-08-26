@@ -10,4 +10,6 @@ export class Category {
         public origin : Language,
         public target : Language) {
     }
+
+    
 }
