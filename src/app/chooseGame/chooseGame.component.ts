@@ -5,11 +5,12 @@ import { GameProfile } from '../../shared/model/gameProfile';
 import { MatCard } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { GameCardComponent } from '../game-card/game-card.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-choose-game',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatCard, GameCardComponent],
+  imports: [CommonModule, MatDialogModule, MatCard, GameCardComponent,RouterModule],
   templateUrl: './chooseGame.component.html',
   styleUrl: './chooseGame.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

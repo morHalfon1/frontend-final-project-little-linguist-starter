@@ -110,7 +110,7 @@ export class CategoriesService {
   }
 
   addTranslatedWordsColors(){
-    let words:TranslatedWord[] = [
+    const words:TranslatedWord[] = [
            new TranslatedWord('אדום', "RED"),
            new TranslatedWord('שחור', "BLACK"),
            new TranslatedWord('כחול', "BLUE"),
@@ -121,7 +121,7 @@ export class CategoriesService {
   }
 
   addTranslatedWordsAnimals(){
-    let words:TranslatedWord[] = [
+    const words:TranslatedWord[] = [
            new TranslatedWord('כלב', "DOG"),
            new TranslatedWord('חתול', "CAT"),
            new TranslatedWord('דג', "FISH"),
@@ -132,7 +132,7 @@ export class CategoriesService {
   }
 
   addTranslatedWordsFood(){
-    let words:TranslatedWord[] = [
+    const words:TranslatedWord[] = [
            new TranslatedWord('ציפס', "CHIPS"),
            new TranslatedWord('פיצה', "PIZZA"),
            new TranslatedWord('לחם', "BREAD"),
@@ -155,14 +155,14 @@ export class CategoriesService {
   }
 
   private getCategories(): Map<number, Category> {
-    let categoriesString = localStorage.getItem(this.CATEGORIES_KEY);
+    const categoriesString = localStorage.getItem(this.CATEGORIES_KEY);
     return categoriesString
       ? new Map<number, Category>(JSON.parse(categoriesString))
       : new Map<number, Category>();
   }
 
   private getNextId(): number {
-    let nextIdString = localStorage.getItem(this.NEXT_ID_KEY);
+    const nextIdString = localStorage.getItem(this.NEXT_ID_KEY);
     return nextIdString ? parseInt(nextIdString) : 0;
   }
 
@@ -179,13 +179,13 @@ export class CategoriesService {
   }
 
   delete(id: number): void {
-    let categoriesMap = this.getCategories();
+    const categoriesMap = this.getCategories();
     categoriesMap.delete(id);
     this.setCategories(categoriesMap);
   }
 
   update(category: Category): void {
-    let categoriesMap = this.getCategories();
+    const categoriesMap = this.getCategories();
     category.lastUpdateDate = new Date();
     categoriesMap.set(category.id, category);
     this.setCategories(categoriesMap);
@@ -194,7 +194,7 @@ export class CategoriesService {
   add(category: Category): void {
     category.id = this.getNextId();
     category.lastUpdateDate = new Date();
-    let categoriesMap = this.getCategories();
+    const categoriesMap = this.getCategories();
     categoriesMap.set(category.id, category);
     this.setCategories(categoriesMap);
     this.setNextId(++category.id);
