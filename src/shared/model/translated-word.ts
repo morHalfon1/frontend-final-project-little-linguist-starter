@@ -4,10 +4,11 @@ export class TranslatedWord {
         public origin : string,
         public target: string) 
         {
-            this.guess=""
+            this.guess="";
         }
         
-    isMatch(){
+    isMatch():boolean{
+        
         return this.target.toLowerCase() === this.guess.toLowerCase();
     }    
 }

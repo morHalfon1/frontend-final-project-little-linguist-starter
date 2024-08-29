@@ -23,13 +23,18 @@
 
   <h2>Unscramble the English word:</h2>
   <p>{{ scrambledWord }}</p>
-  <!-- Display scrambled English word -->
-  <mat-form-field>
+  
+  <mat-form-field *ngIf="currentWord">
     <mat-label>Enter your guess</mat-label>
-    <input matInput [(ngModel)]="guess" (input)="onInput()" />
+    <input matInput [(ngModel)]="currentWord.guess" (input)="onInput()" />
   </mat-form-field>
-  <button>reset</button>
-  <button>submit</button>
+  
+  <button mat-raised-button color="primary" (click)="resetGame()">
+    Reset
+  </button>
+  <button mat-raised-button color="primary" (click)="submitGuess()">
+    Submit
+  </button>
   <mat-progress-bar mode="determinate" [value]="progress" color="primary">
   </mat-progress-bar>
 </div>

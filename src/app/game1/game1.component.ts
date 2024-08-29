@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component,ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component,ViewChild, OnInit } from '@angular/core';
 import { Category } from '../../shared/model/category';
 import { CategoriesService } from '../services/categories.service';
 import { ExitButtonComponent } from '../exit-button/exit-button.component';
@@ -9,6 +9,7 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { TranslatedWord } from '../../shared/model/translated-word';
 import { FormsModule } from '@angular/forms';
+
 
 
 
@@ -29,14 +30,23 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './game1.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Game1Component {
-  // [x: string]: any;
+export class Game1Component implements OnInit {
+//   updateProgress(increment: number): void {
+//     this.progress += increment;
+//     // מוודא שמד ההתקדמות לא יעלה על 100%
+//     if (this.progress > 100) {
+//       this.progress = 100;
+// }
+//   }
+// }
+
+  [x: string]: any;
   selectCategory?: Category;
   currentWord?: TranslatedWord;  
   scrambledWord: string = '';    
   progress: number = 0;
-guess: any;
-
+  guess?: string = '';
+  
   constructor(private categoriesService: CategoriesService) {}
 
   ngOnInit(): void {
@@ -78,22 +88,32 @@ guess: any;
   }
 
   submitGuess(): void {
-    if (this['currentWord'] && this['currentWord'].isMatch()) {
+    console.log('Current Word:', this.currentWord);
+    console.log('Guess:', this.currentWord?.guess);
+    console.log('Target:', this.currentWord?.target);
+
+    if (this['currentWord']?.guess && this['currentWord'].isMatch()) {
      // add into the component url instead
       alert('Correct!');
       this.resetGame();
-      // add the moving to the other word in the category
+    
     } else {
        // add into the component url instead
-      alert('Try again!');
+      alert('This isnt correct!');
+      this.resetGame();
     }
   }
 
+
   resetGame(): void {
-    if (this['currentWord']) {
-      this['currentWord'].guess = '';
+    // if (this['currentWord']) {
+    //   this['currentWord'].guess = '';
+    //   this.progress = 0;
+    //   this.loadWord(); // Load new words for the next round
+    if (this.currentWord) {
+      this.currentWord.guess = '';
       this.progress = 0;
-      this.loadWord(); // Load new words for the next round
+      this.loadWord(); 
     }
   }
 }
