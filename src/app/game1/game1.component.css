@@ -1,81 +1,75 @@
-:host {
-  display: block;
-}
 
-.container {
-  width: 90%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 16px;
-}
-
-mat-card {
-  padding: 16px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-mat-card-header {
-  background-color: #f5f5f5;
-  padding: 16px;
-}
-
-mat-card-title h1 {
-  font-size: 24px;
+body {
+  font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun and playful font */
+  background-color: #FFF5E1; /* Soft light background color */
   margin: 0;
+  padding: 0;
 }
 
-mat-card-content {
-  padding: 16px;
+
+h1, h2 {
+  color: #FF6F61; /* Bright, friendly color */
+  text-align: center;
 }
 
-h2 {
-  color: #333333;
-  font-size: 20px;
-  margin: 0;
-}
-h1 {
-  color: #333333;
-  font-size: 40px;
-  margin: 70px;
-  padding: 16px;
-}
 
-.button-container {
-  position: relative;
-  width: 100%;
-  height: 200px;
-  border: 1px solid #ccc;
+.exit, .coins {
+  position: absolute;
+  top: 70px;
 }
 
 .exit {
-  position: absolute;
-  top: 100px;
-  left: 0;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  left: 20px;
 }
 
 .coins {
-  position: absolute;
-  top: 100px;
-  right: 0;
+  right: 20px;
+}
+
+/* Game Container */
+.game-container {
+  background-color: #FFFAE3; /* Light yellow background */
+  border-radius: 15px; /* Rounded corners for a friendly look */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  padding: 20px;
+  max-width: 500px;
+  margin: 50px auto; /* Centering the container */
+  text-align: center; /* Centered text */
+}
+
+/* Form Field */
+mat-form-field {
+  width: 100%; /* Full width for better spacing */
+  margin-top: 20px;
+}
+
+input[matInput] {
+  background-color: #FFEEAD; /* Soft pastel background */
+  border-radius: 10px; /* Rounded edges */
+  padding: 10px;
+  font-size: 18px;
+}
+
+/* Buttons */
+button[mat-raised-button] {
+  background-color: #FF6F61; 
+  color: #FFF; 
+  border-radius: 10px;
   padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  font-size: 18px;
+  margin: 10px;
+  transition: background-color 0.3s ease;
 }
 
-.exit:hover {
-  background-color: white;
+button[mat-raised-button]:hover {
+  background-color: #FF4F41; 
 }
 
-.coins:hover {
-  background-color: #0056b3;
+
+mat-progress-bar {
+  margin-top: 20px;
+  height: 20px; 
+  border-radius: 10px; 
 }
+
+
