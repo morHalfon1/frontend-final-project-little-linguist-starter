@@ -33,13 +33,14 @@ import { Router } from '@angular/router';
 export class Game1Component implements OnInit {
 
   [x: string]: any;
-  // private seenWords: Set<string> = new Set(); 
   private allWords: TranslatedWord[] = [];    
   selectCategory?: Category;
   currentWord?: TranslatedWord;  
   scrambledWord: string = '';    
   progress: number = 0;
   guess?: string = '';
+  totalWords: number =0;
+  CompleteWords: number =0;
   
   constructor(private categoriesService: CategoriesService,private router: Router) {}
 
@@ -48,7 +49,8 @@ export class Game1Component implements OnInit {
     console.log('Selected category in game:', this.selectCategory);
     if (this.selectCategory && this.selectCategory.words) {
       this.allWords = [...this.selectCategory.words];
-      
+      this.totalWords= this.allWords.length;
+
     }
     this.loadWord();
   }
@@ -61,10 +63,11 @@ export class Game1Component implements OnInit {
       console.log("load word is working")
       return;
     }
+    
     const selectedCategory = this.categoriesService.getSelectedCategory();
     if (selectedCategory && selectedCategory.words) {
      
-      this['currentWord'] =  this.currentWord = this.getRandomWord();
+      this['currentWord'] = this.getRandomWord();
       // this.getRandomWord(selectedCategory.words);
       if (this['currentWord']) {
         this['scrambledWord'] = this.scrambleWord(this['currentWord'].target);
@@ -73,6 +76,12 @@ export class Game1Component implements OnInit {
   }
 
   getRandomWord(): TranslatedWord {
+    this.progress= 100/ this.totalWords; 
+    console.log("the prosses is:" + this.progress);
+    this.CompleteWords++;
+    console.log("compelte" + this.CompleteWords);
+    this.updateProgress();
+    console.log("update progress" +this.updateProgress);
     const randomIndex = Math.floor(Math.random() * this.allWords.length);
     const selectedWord = this.allWords.splice(randomIndex, 1)[0];
     console.log(this.allWords);
@@ -88,28 +97,27 @@ export class Game1Component implements OnInit {
   }
 
   onInput(): void {
-    if (this['currentWord']) {
-      this.progress =
-        (this['currentWord'].guess.length / this['currentWord'].target.length) *
-        100;
-    }
+    
   }
 
   submitGuess(): void {
     console.log('Current Word:', this.currentWord);
     console.log('Guess:', this.currentWord?.guess);
     console.log('Target:', this.currentWord?.target);
-
+    
+    
     if (this['currentWord']?.guess && this['currentWord'].isMatch()) {
      // add into the component url instead
+      
       this.onCorrectAnswer();
       alert('Correct!');
       this.resetGame();
-    
     } else {
        // add into the component url instead
+     
       alert('This isnt correct!');
       this.resetGame();
+      
     }
   }
 
@@ -124,27 +132,18 @@ export class Game1Component implements OnInit {
 
 
   onCorrectAnswer(): void {
-    const coinsUpdate: number= Math.floor(100/ (this.allWords.length+1));
-    this.coinButton.addPoints(coinsUpdate);  
-    // this.updateProgress(10);  
+    const coinsUpdate: number= Math.floor(100/ (this.totalWords));
+    this.coinButton.addPoints(coinsUpdate);    
   }
 
-//   updateProgress(increment: number): void {
-//     this.progress += increment;
-
-//     // מוודא שמד ההתקדמות לא יעלה על 100%
+  updateProgress(): void {
+    this.progress = (this.CompleteWords/ this.totalWords) * 100;
+    console.log(this.progress);
 //     if (this.progress > 100) {
 //       this.progress = 100;
 // }
-//   }
+  }
 
-//   updateProgress(increment: number): void {
-//     this.progress += increment;
-//     // מוודא שמד ההתקדמות לא יעלה על 100%
-//     if (this.progress > 100) {
-//       this.progress = 100;
-// }
-//   }
 }
 
   
