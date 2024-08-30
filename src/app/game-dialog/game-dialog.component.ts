@@ -6,7 +6,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { GameProfile } from '../../shared/model/gameProfile';
-import { DeleteCategoryDialogComponent } from '../delete-category-dialog/delete-category-dialog.component';
+// import { DeleteCategoryDialogComponent } from '../delete-category-dialog/delete-category-dialog.component';
 import { Category } from '../../shared/model/category';
 import { CategoriesService } from '../services/categories.service';
 import { MatSelectModule } from '@angular/material/select';
@@ -47,7 +47,7 @@ export class GameDialogComponent implements OnInit {
   categories: Category[] = [];
   selectCategory?: Category;
   // router: any;
-  selectedCategory: any;
+  // selectedCategory: any;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: GameProfile,
     private categoriesService: CategoriesService,

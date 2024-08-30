@@ -9,9 +9,7 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { TranslatedWord } from '../../shared/model/translated-word';
 import { FormsModule } from '@angular/forms';
-
-
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game1',
@@ -25,51 +23,61 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     FormsModule,
     MatInput,
+    
+    
   ],
   templateUrl: './game1.component.html',
   styleUrl: './game1.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Game1Component implements OnInit {
-//   updateProgress(increment: number): void {
-//     this.progress += increment;
-//     // מוודא שמד ההתקדמות לא יעלה על 100%
-//     if (this.progress > 100) {
-//       this.progress = 100;
-// }
-//   }
-// }
 
   [x: string]: any;
+  // private seenWords: Set<string> = new Set(); 
+  private allWords: TranslatedWord[] = [];    
   selectCategory?: Category;
   currentWord?: TranslatedWord;  
   scrambledWord: string = '';    
   progress: number = 0;
   guess?: string = '';
   
-  constructor(private categoriesService: CategoriesService) {}
+  constructor(private categoriesService: CategoriesService,private router: Router) {}
 
   ngOnInit(): void {
     this.selectCategory = this.categoriesService.getSelectedCategory();
     console.log('Selected category in game:', this.selectCategory);
+    if (this.selectCategory && this.selectCategory.words) {
+      this.allWords = [...this.selectCategory.words];
+      
+    }
     this.loadWord();
   }
   @ViewChild(CoinsButtonComponent) coinButton!: CoinsButtonComponent;
 
   
   loadWord(): void {
+    if(this.allWords.length===0){
+      this['router'].navigate(['choose-game'])
+      console.log("load word is working")
+      return;
+    }
     const selectedCategory = this.categoriesService.getSelectedCategory();
     if (selectedCategory && selectedCategory.words) {
-      this['currentWord'] = this.getRandomWord(selectedCategory.words);
+     
+      this['currentWord'] =  this.currentWord = this.getRandomWord();
+      // this.getRandomWord(selectedCategory.words);
       if (this['currentWord']) {
         this['scrambledWord'] = this.scrambleWord(this['currentWord'].target);
       }
     }
   }
 
-  getRandomWord(words: TranslatedWord[]): TranslatedWord {
-    const randomIndex = Math.floor(Math.random() * words.length);
-    return words[randomIndex];
+  getRandomWord(): TranslatedWord {
+    const randomIndex = Math.floor(Math.random() * this.allWords.length);
+    const selectedWord = this.allWords.splice(randomIndex, 1)[0];
+    console.log(this.allWords);
+    return selectedWord;
+    
   }
 
   scrambleWord(word: string): string {
@@ -94,6 +102,7 @@ export class Game1Component implements OnInit {
 
     if (this['currentWord']?.guess && this['currentWord'].isMatch()) {
      // add into the component url instead
+      this.onCorrectAnswer();
       alert('Correct!');
       this.resetGame();
     
@@ -104,24 +113,21 @@ export class Game1Component implements OnInit {
     }
   }
 
-
   resetGame(): void {
-    // if (this['currentWord']) {
-    //   this['currentWord'].guess = '';
-    //   this.progress = 0;
-    //   this.loadWord(); // Load new words for the next round
+    
     if (this.currentWord) {
       this.currentWord.guess = '';
       this.progress = 0;
       this.loadWord(); 
     }
   }
-}
 
-//   onCorrectAnswer(): void {
-//     this.coinButton.addPoints(10); // מוסיף נקודות
-//     this.updateProgress(10); // מעדכן את מד ההתקדמות
-//   }
+
+  onCorrectAnswer(): void {
+    const coinsUpdate: number= Math.floor(100/ (this.allWords.length+1));
+    this.coinButton.addPoints(coinsUpdate);  
+    // this.updateProgress(10);  
+  }
 
 //   updateProgress(increment: number): void {
 //     this.progress += increment;
@@ -131,4 +137,14 @@ export class Game1Component implements OnInit {
 //       this.progress = 100;
 // }
 //   }
+
+//   updateProgress(increment: number): void {
+//     this.progress += increment;
+//     // מוודא שמד ההתקדמות לא יעלה על 100%
+//     if (this.progress > 100) {
+//       this.progress = 100;
 // }
+//   }
+}
+
+  
