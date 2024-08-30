@@ -5,6 +5,7 @@ import { Game1Component } from './game1/game1.component';
 import { Game2Component } from './game2/game2.component';
 import { HelpComponent } from './help/help.component';
 import { ChooseGameComponent } from './chooseGame/chooseGame.component';
+import { ExitDialogComponent } from './exit-dialog/exit-dialog.component';
 
 export const routes: Routes = [
   { path: '', component: ChooseGameComponent },
@@ -15,5 +16,6 @@ export const routes: Routes = [
   { path: 'first-game', component: Game1Component },
   { path: 'second-game', component: Game2Component },
   { path: 'help', component: HelpComponent },
+  {path:'exit-dialog', component:ExitDialogComponent},
   { path: '**', redirectTo: '' },
 ];
