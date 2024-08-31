@@ -139,9 +139,7 @@ export class Game1Component implements OnInit {
   updateProgress(): void {
     this.progress = (this.CompleteWords/ this.totalWords) * 100;
     console.log(this.progress);
-//     if (this.progress > 100) {
-//       this.progress = 100;
-// }
+
   }
 
 }
