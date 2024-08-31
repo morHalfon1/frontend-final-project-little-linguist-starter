@@ -6,9 +6,12 @@ import { Game2Component } from './game2/game2.component';
 import { HelpComponent } from './help/help.component';
 import { ChooseGameComponent } from './chooseGame/chooseGame.component';
 import { ExitDialogComponent } from './exit-dialog/exit-dialog.component';
+import { SummaryComponent } from './SummaryScreen/SummaryScreen.component';
+
 
 export const routes: Routes = [
   { path: '', component: ChooseGameComponent },
+  { path: 'summary', component: SummaryComponent },
   { path: 'categories', component: CategoriesListComponent },
   { path: 'category/:id', component: CategoryFormComponent },
   { path: 'newcategory', component: CategoryFormComponent },
