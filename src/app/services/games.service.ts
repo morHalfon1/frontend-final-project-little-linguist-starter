@@ -6,8 +6,18 @@ import { GameProfile } from '../../shared/model/gameProfile';
 })
 export class GamesService {
   private game: GameProfile[] = [
-    new GameProfile(1, 'משחק מילים מבולגנות', 'עלייך לתרגם את המילים בעזרת המילים המבולגנות', 'first-game'),
-    new GameProfile(2, 'משחק מיון מילים', 'עלייך למיין את המילים לפי הקטגוריה', 'second-game'),
+    new GameProfile(
+      1,
+      'משחק מילים מבולגנות',
+      'עלייך לתרגם את המילים בעזרת המילים המבולגנות',
+      'first-game'
+    ),
+    new GameProfile(
+      2,
+      'משחק מיון מילים',
+      'עלייך למיין את המילים לפי הקטגוריה',
+      'second-game'
+    ),
   ];
 
   constructor() {}
