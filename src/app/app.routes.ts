@@ -7,6 +7,8 @@ import { HelpComponent } from './help/help.component';
 import { ChooseGameComponent } from './chooseGame/chooseGame.component';
 import { ExitDialogComponent } from './exit-dialog/exit-dialog.component';
 import { DashBoardComponent } from './dashBoard/dashBoard.component';
+import { CorrectDialogComponent } from './correct-dialog/correct-dialog.component';
+import { FailureDialogComponent } from './failure-dialog/failure-dialog.component';
 
 export const routes: Routes = [
   { path: '', component: DashBoardComponent },
@@ -17,7 +19,9 @@ export const routes: Routes = [
   { path: 'first-game', component: Game1Component },
   { path: 'second-game', component: Game2Component },
   { path: 'help', component: HelpComponent },
-{path: 'dashboard',component: DashBoardComponent},
-  {path:'exit-dialog', component:ExitDialogComponent},
+  { path: 'dashboard', component: DashBoardComponent },
+  { path: 'Correct-Dialog', component: CorrectDialogComponent },
+  { path: 'Failure-Dialog', component: FailureDialogComponent },
+  { path: 'exit-dialog', component: ExitDialogComponent },
   { path: '**', redirectTo: '' },
 ];

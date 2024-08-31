@@ -34,13 +34,9 @@
   <button mat-raised-button color="primary" (click)="submitGuess()">
     Submit
   </button>
-  <!-- <mat-progress-bar mode="determinate" [value]= "progress" >
-  </mat-progress-bar> -->
   <div class="progress-container">
     <div class="progress-label start">{{ CompleteWords }}</div>
     <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
     <div class="progress-label end">{{ totalWords }}</div>
   </div>
-  
-  
 </div>
