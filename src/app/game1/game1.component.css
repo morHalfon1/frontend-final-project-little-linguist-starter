@@ -73,3 +73,22 @@ mat-progress-bar {
 }
 
 
+.progress-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.progress-label {
+  width: 40px; /* Adjust width as needed */
+  text-align: center;
+  font-weight: bold;
+  color: black;
+}
+
+mat-progress-bar {
+  flex-grow: 1;
+  height: 20px; /* Adjust height as needed */
+  margin: 0 10px; /* Space between the labels and the progress bar */
+}

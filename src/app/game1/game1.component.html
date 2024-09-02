@@ -1,3 +1,6 @@
+<div class ="title">
+  <h1>משחק מילים מבולגנות</h1>
+</div>
 <div *ngIf="selectCategory">
   <h1>Selected Category: {{ selectCategory.name }}</h1>
 </div>
@@ -31,7 +34,9 @@
   <button mat-raised-button color="primary" (click)="submitGuess()">
     Submit
   </button>
-  <mat-progress-bar mode="determinate" [value]= "progress" >
-  </mat-progress-bar>
-  
+  <div class="progress-container">
+    <div class="progress-label start">{{ CompleteWords }}</div>
+    <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+    <div class="progress-label end">{{ totalWords }}</div>
+  </div>
 </div>
