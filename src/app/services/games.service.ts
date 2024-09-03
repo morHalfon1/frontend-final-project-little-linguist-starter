@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GameProfile } from '../../shared/model/gameProfile';
+import { Wordfinal } from '../final-screen/final-screen.component';
 
 @Injectable({
   providedIn: 'root',
@@ -19,9 +20,19 @@ export class GamesService {
       'second-game'
     ),
   ];
+  
+  private wordResults: Wordfinal[] = [];
 
   constructor() {}
   list(): GameProfile[] {
     return this.game;
+  }
+
+  setResults(results: Wordfinal[]): void {
+    this.wordResults = results;
+  }
+
+  getResults(): Wordfinal[] {
+    return this.wordResults;
   }
 }

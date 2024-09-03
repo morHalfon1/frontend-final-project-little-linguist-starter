@@ -1,0 +1,55 @@
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun and playful font */
+    background-color: #FFF5E1; /* Soft light background color */
+    margin: 0;
+    padding: 0;
+  }
+  
+  h2 {
+    color: #FF6F61; /* Bright, friendly color */
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .final-container {
+    background-color: #FFFAE3; /* Light yellow background */
+    border-radius: 15px; /* Rounded corners for a friendly look */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    padding: 20px;
+    max-width: 600px;
+    margin: 50px auto; /* Centering the container */
+    text-align: center; /* Centered text */
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th.mat-header-cell {
+    background-color: #FF6F61; /* Bright header color */
+    color: #FFF;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+  }
+  
+  td.mat-cell {
+    background-color: #FFEEAD; /* Soft pastel background */
+    color: black;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #FFF5E1; /* Alternating row color */
+  }
+  
+  .result-icon {
+    font-size: 24px; /* Larger icons for clarity */
+  }
+  

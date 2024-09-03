@@ -18,6 +18,8 @@ import { Router } from '@angular/router';
 import { CorrectDialogComponent } from '../correct-dialog/correct-dialog.component';
 import { FailureDialogComponent } from '../failure-dialog/failure-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Wordfinal } from '../final-screen/final-screen.component';
+import { GamesService } from '../services/games.service';
 
 @Component({
   selector: 'app-game1',
@@ -39,6 +41,7 @@ import { MatDialog } from '@angular/material/dialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Game1Component implements OnInit {
+  [x: string]: any;
   private allWords: TranslatedWord[] = [];
   selectCategory?: Category;
   currentWord?: TranslatedWord;
@@ -48,6 +51,8 @@ export class Game1Component implements OnInit {
   totalWords: number = 0;
   completeWords: number = 0;
   dialogRef: any;
+  wordResult :Wordfinal [] =[];
+  
 
   onInput(): void {
   }
@@ -55,7 +60,8 @@ export class Game1Component implements OnInit {
   constructor(
     private categoriesService: CategoriesService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private gamesService: GamesService
   ) {}
 
   ngOnInit(): void {
@@ -100,20 +106,45 @@ export class Game1Component implements OnInit {
       .sort(() => 0.5 - Math.random())
       .join('');
   }
+  
+  isButtonDisabled(): boolean {
+    if (!this.currentWord?.guess) {
+      return true; // Disable if the guess is empty
+    }
+
+    // Regex to check if the text contains Hebrew characters
+    const hebrewRegex = /[\u0590-\u05FF]/;
+    if (hebrewRegex.test(this.currentWord.guess)) {
+      return true; // Disable if the guess contains Hebrew characters
+    }
+
+    return false; // Enable otherwise
+  }
 
   submitGuess(): void {
+    let isCorrect = false;
     console.log('Current Word:', this.currentWord);
     console.log('Guess:', this.currentWord?.guess);
     console.log('Target:', this.currentWord?.target);
 
     if (this.currentWord?.guess && this.currentWord.isMatch()) {
       this.dialogRef = this.dialog.open(CorrectDialogComponent);
+       isCorrect = true;
       this.onCorrectAnswer();
-      this.resetGame();
+      
+      
     } else {
       this.dialogRef = this.dialog.open(FailureDialogComponent);
-      this.resetGame();
+      
+      
     }
+    if(this.currentWord)
+    this.wordResult.push({
+      hebrewWord: this.currentWord.origin,
+      englishWord: this.currentWord.target,
+      isCorrect: isCorrect
+    })
+    this.resetGame();
   }
 
   resetGame(): void {
@@ -135,10 +166,10 @@ export class Game1Component implements OnInit {
   }
 
   finishGame(): void {
-    console.log('Navigating to final-screen with words:', this.allWords);
-    this.router.navigate(['/final-screen'], {
-      state: { wordsFinal: this.allWords ?? [] }  
-    });
-  }
+    this.gamesService.setResults(this.wordResult); 
+    this.router.navigate(['/final-screen']);
+    
+    }
+  
   
 }

@@ -70,10 +70,6 @@ export class GameDialogComponent implements OnInit {
 
   play(): void {
     console.log(this.data.url);
-    // if (this.selectCategory) {
-    //   this.categoriesService.setSelectedCategory(this.selectCategory); 
-    //   console.log(this.selectCategory);
-      // Set the selected category in the shared service
     this.dialogRef.close();
     this.router.navigate([this.data.url]);
   }

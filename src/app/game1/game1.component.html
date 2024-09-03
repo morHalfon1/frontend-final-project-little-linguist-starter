@@ -31,7 +31,7 @@
   <button mat-raised-button color="primary" (click)="resetGame()">
     Reset
   </button>
-  <button mat-raised-button color="primary" (click)="submitGuess()">
+  <button mat-raised-button color="primary" [disabled]="isButtonDisabled()" (click)="submitGuess()">
     Submit
   </button>
   <div class="progress-container">
