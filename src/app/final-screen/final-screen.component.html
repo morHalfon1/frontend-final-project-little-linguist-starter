@@ -1,18 +1,15 @@
-<div class="summary-container">
+<div class="final-container">
   <h2>סיכום המשחק</h2>
-  <table mat-table [dataSource]="wordsSummary" class="mat-elevation-z8">
-
+  <table mat-table [dataSource]="wordsFinal" class="mat-elevation-z8">
     <ng-container matColumnDef="hebrewWord">
       <th mat-header-cell *matHeaderCellDef> מילה בעברית </th>
       <td mat-cell *matCellDef="let element"> {{element.hebrewWord}} </td>
     </ng-container>
 
-
     <ng-container matColumnDef="englishWord">
       <th mat-header-cell *matHeaderCellDef> מילה באנגלית </th>
       <td mat-cell *matCellDef="let element"> {{element.englishWord}} </td>
     </ng-container>
-
 
     <ng-container matColumnDef="isCorrect">
       <th mat-header-cell *matHeaderCellDef> תוצאה </th>
@@ -21,7 +18,6 @@
         <span *ngIf="!element.isCorrect">❌</span>
       </td>
     </ng-container>
-
 
     <tr mat-header-row *matHeaderRowDef="['hebrewWord', 'englishWord', 'isCorrect']"></tr>
     <tr mat-row *matRowDef="let row; columns: ['hebrewWord', 'englishWord', 'isCorrect'];"></tr>

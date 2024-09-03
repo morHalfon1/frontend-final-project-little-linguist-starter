@@ -1,17 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SummaryComponent } from './SummaryScreen.component' ;
 
-describe('SummaryScreenComponent', () => {
-  let component: SummaryComponent;
-  let fixture: ComponentFixture<SummaryComponent>;
+import { FinalScreenComponent } from './final-screen.component';
+
+describe('FinalScreenComponent', () => {
+  let component: FinalScreenComponent;
+  let fixture: ComponentFixture<FinalScreenComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SummaryComponent]
+      imports: [FinalScreenComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SummaryComponent);
+    fixture = TestBed.createComponent(FinalScreenComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

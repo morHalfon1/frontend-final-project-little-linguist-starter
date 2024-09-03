@@ -6,21 +6,16 @@ import { Game2Component } from './game2/game2.component';
 import { HelpComponent } from './help/help.component';
 import { ChooseGameComponent } from './chooseGame/chooseGame.component';
 import { ExitDialogComponent } from './exit-dialog/exit-dialog.component';
-<<<<<<< HEAD
-import { SummaryComponent } from './SummaryScreen/SummaryScreen.component';
-
-
-export const routes: Routes = [
-  { path: '', component: ChooseGameComponent },
-  { path: 'summary', component: SummaryComponent },
-=======
 import { DashBoardComponent } from './dashBoard/dashBoard.component';
 import { CorrectDialogComponent } from './correct-dialog/correct-dialog.component';
 import { FailureDialogComponent } from './failure-dialog/failure-dialog.component';
+import { FinalScreenComponent } from './final-screen/final-screen.component';
+
+
+
 
 export const routes: Routes = [
   { path: '', component: DashBoardComponent },
->>>>>>> 407c40e0d93457db0339a48b78adcefd30d1a8f3
   { path: 'categories', component: CategoriesListComponent },
   { path: 'category/:id', component: CategoryFormComponent },
   { path: 'newcategory', component: CategoryFormComponent },
@@ -32,5 +27,6 @@ export const routes: Routes = [
   { path: 'Correct-Dialog', component: CorrectDialogComponent },
   { path: 'Failure-Dialog', component: FailureDialogComponent },
   { path: 'exit-dialog', component: ExitDialogComponent },
+  { path: 'final-screen', component: FinalScreenComponent },
   { path: '**', redirectTo: '' },
 ];
