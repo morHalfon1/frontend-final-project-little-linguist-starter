@@ -33,15 +33,12 @@ import { MatDialog } from '@angular/material/dialog';
     MatInput,
     CorrectDialogComponent,
     FailureDialogComponent,
-
-  
   ],
   templateUrl: './game1.component.html',
-  styleUrl: './game1.component.css',
+  styleUrls: ['./game1.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Game1Component implements OnInit {
-  [x: string]: any;
   private allWords: TranslatedWord[] = [];
   selectCategory?: Category;
   currentWord?: TranslatedWord;
@@ -49,9 +46,11 @@ export class Game1Component implements OnInit {
   progress: number = 0;
   guess?: string = '';
   totalWords: number = 0;
-  CompleteWords: number = 0;
-  dialogRef:any;
-  // dialogRef: MatDialogRef<any>;
+  completeWords: number = 0;
+  dialogRef: any;
+
+  onInput(): void {
+  }
 
   constructor(
     private categoriesService: CategoriesService,
@@ -68,35 +67,30 @@ export class Game1Component implements OnInit {
     }
     this.loadWord();
   }
+
   @ViewChild(CoinsButtonComponent) coinButton!: CoinsButtonComponent;
 
   loadWord(): void {
     if (this.allWords.length === 0) {
-      this['router'].navigate(['choose-game']);
-      console.log('load word is working');
+      this.finishGame();
       return;
     }
 
     const selectedCategory = this.categoriesService.getSelectedCategory();
     if (selectedCategory && selectedCategory.words) {
-      this['currentWord'] = this.getRandomWord();
-      // this.getRandomWord(selectedCategory.words);
-      if (this['currentWord']) {
-        this['scrambledWord'] = this.scrambleWord(this['currentWord'].target);
+      this.currentWord = this.getRandomWord();
+      if (this.currentWord) {
+        this.scrambledWord = this.scrambleWord(this.currentWord.target);
       }
     }
   }
 
   getRandomWord(): TranslatedWord {
     this.progress = 100 / this.totalWords;
-    console.log('the prosses is:' + this.progress);
-    this.CompleteWords++;
-    console.log('compelte' + this.CompleteWords);
+    this.completeWords++;
     this.updateProgress();
-    console.log('update progress' + this.updateProgress);
     const randomIndex = Math.floor(Math.random() * this.allWords.length);
     const selectedWord = this.allWords.splice(randomIndex, 1)[0];
-    console.log(this.allWords);
     return selectedWord;
   }
 
@@ -107,24 +101,17 @@ export class Game1Component implements OnInit {
       .join('');
   }
 
-  onInput(): void {}
-
   submitGuess(): void {
     console.log('Current Word:', this.currentWord);
     console.log('Guess:', this.currentWord?.guess);
     console.log('Target:', this.currentWord?.target);
 
-    if (this['currentWord']?.guess && this['currentWord'].isMatch()) {
-      this.dialogRef = this['dialog'].open(CorrectDialogComponent);
-  
+    if (this.currentWord?.guess && this.currentWord.isMatch()) {
+      this.dialogRef = this.dialog.open(CorrectDialogComponent);
       this.onCorrectAnswer();
-      // this.router.navigate(['/Correct-Dialog']);
-      this['resetGame']();
-        
+      this.resetGame();
     } else {
-      
-      this.dialogRef = this['dialog'].open(FailureDialogComponent);
-      // this.router.navigate(['/Failure-Dialog']);
+      this.dialogRef = this.dialog.open(FailureDialogComponent);
       this.resetGame();
     }
   }
@@ -143,7 +130,15 @@ export class Game1Component implements OnInit {
   }
 
   updateProgress(): void {
-    this.progress = (this.CompleteWords / this.totalWords) * 100;
+    this.progress = (this.completeWords / this.totalWords) * 100;
     console.log(this.progress);
   }
+
+  finishGame(): void {
+    console.log('Navigating to final-screen with words:', this.allWords);
+    this.router.navigate(['/final-screen'], {
+      state: { wordsFinal: this.allWords ?? [] }  
+    });
+  }
+  
 }

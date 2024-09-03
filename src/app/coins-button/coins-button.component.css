@@ -1,4 +1,4 @@
-/* .coin-button {
+ .coin-button {
     display: flex;
     align-items: center;
     background-color: #ffd700; /* צבע זהב */
@@ -11,5 +11,5 @@
   .coin-button mat-icon {
     margin-right: 8px;
     font-size: 24px;
-  } */
+  } 
   

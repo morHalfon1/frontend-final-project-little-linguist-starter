@@ -9,6 +9,10 @@ import { ExitDialogComponent } from './exit-dialog/exit-dialog.component';
 import { DashBoardComponent } from './dashBoard/dashBoard.component';
 import { CorrectDialogComponent } from './correct-dialog/correct-dialog.component';
 import { FailureDialogComponent } from './failure-dialog/failure-dialog.component';
+import { FinalScreenComponent } from './final-screen/final-screen.component';
+
+
+
 
 export const routes: Routes = [
   { path: '', component: DashBoardComponent },
@@ -23,5 +27,6 @@ export const routes: Routes = [
   { path: 'Correct-Dialog', component: CorrectDialogComponent },
   { path: 'Failure-Dialog', component: FailureDialogComponent },
   { path: 'exit-dialog', component: ExitDialogComponent },
+  { path: 'final-screen', component: FinalScreenComponent },
   { path: '**', redirectTo: '' },
 ];
