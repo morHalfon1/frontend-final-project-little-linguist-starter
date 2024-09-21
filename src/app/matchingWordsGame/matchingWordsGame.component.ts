@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Category } from '../../shared/model/category';
 import { CategoriesService } from '../services/categories.service';
 
@@ -7,12 +7,12 @@ import { CategoriesService } from '../services/categories.service';
   selector: 'app-game2',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './MatchingWordsGame.component.html',
-  styleUrl: './MatchingWordsGame.component.css',
+  templateUrl: './matchingWordsGame.component.html',
+  styleUrl: './matchingWordsGame.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class MatchingWordsGameComponent {
+export class MatchingWordsGameComponent implements OnInit {
   selectCategory?: Category;
 
   constructor(private categoriesService: CategoriesService) {}
