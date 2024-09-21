@@ -18,10 +18,9 @@ import { MatDialogActions } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { categories } from '../../shared/data/categories';
 import { routes } from '../app.routes';
-import { Game1Component } from '../game1/game1.component';
-import { Game2Component } from '../game2/game2.component';
+import { Game1Component } from '../mixedLettersGame/mixedLettersGame.component';
+import { Game2Component } from '../matchingWordsGame/matchingWordsGame.component';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-game-dialog',
@@ -52,14 +51,12 @@ export class GameDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: GameProfile,
     private categoriesService: CategoriesService,
     private router: Router,
-    private dialogRef: MatDialogRef<GameDialogComponent>,
-    
+    private dialogRef: MatDialogRef<GameDialogComponent>
   ) {
     console.log(this.data);
   }
   ngOnInit(): void {
     this.categories = this.categoriesService.list();
-
   }
 
   onCategoryChange(category: Category): void {

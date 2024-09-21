@@ -1,5 +1,6 @@
-
 import { Injectable } from '@angular/core';
+import { AngularFireFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { Category } from '../../shared/model/category';
 import { Language } from '../../shared/model/language';
 import { TranslatedWord } from '../../shared/model/translated-word';
@@ -8,58 +9,34 @@ import { TranslatedWord } from '../../shared/model/translated-word';
   providedIn: 'root',
 })
 export class CategoriesService {
-  private readonly CATEGORIES_KEY = 'categories';
-  private readonly NEXT_ID_KEY = 'nextId';
   private selectCategory: Category | undefined;
 
-  private categories: Category[] = [
-    new Category(1, 'Colors', Language.English, Language.English),
-    new Category(2, 'Animals', Language.English, Language.English),
-    new Category(3, 'Food', Language.English, Language.English),
-  ];
-
-
-  constructor() {
-    this.addTranslatedWordsColors();
-    this.addTranslatedWordsAnimals();
-    this.addTranslatedWordsFood();
+  constructor(private firestore: AngularFireFirestore) {
+    this.initializeCategories();
   }
 
-  addTranslatedWordsColors(){
-    const words:TranslatedWord[] = [
-           new TranslatedWord('אדום', "RED"),
-           new TranslatedWord('שחור', "BLACK"),
-           new TranslatedWord('כחול', "BLUE"),
-           new TranslatedWord('צהוב', "YELLOW")
-    ]
-
-    this.categories[0].words = words;
+  // Initialize categories in Firestore (you might want to run this only once)
+  private async initializeCategories() {
+    const existingCategories = await this.firestore
+      .collection<Category>('categories')
+      .get()
+      .toPromise();
+    if (existingCategories.empty) {
+      await this.firestore
+        .collection('categories')
+        .add(new Category(1, 'Colors', Language.English, Language.English));
+      await this.firestore
+        .collection('categories')
+        .add(new Category(2, 'Animals', Language.English, Language.English));
+      await this.firestore
+        .collection('categories')
+        .add(new Category(3, 'Food', Language.English, Language.English));
+      // Optionally call addTranslatedWords here if needed
+    }
   }
 
-  addTranslatedWordsAnimals(){
-    const words:TranslatedWord[] = [
-           new TranslatedWord('כלב', "DOG"),
-           new TranslatedWord('חתול', "CAT"),
-           new TranslatedWord('דג', "FISH"),
-           new TranslatedWord('סוס', "HORSE")
-    ]
-
-    this.categories[1].words = words;
-  }
-
-  addTranslatedWordsFood(){
-    const words:TranslatedWord[] = [
-           new TranslatedWord('ציפס', "CHIPS"),
-           new TranslatedWord('פיצה', "PIZZA"),
-           new TranslatedWord('לחם', "BREAD"),
-           new TranslatedWord('גבינה', "CHEESE")
-    ]
-
-    this.categories[2].words = words;
-  }
-
-  list(): Category[] {
-    return this.categories;
+  list(): Observable<Category[]> {
+    return this.firestore.collection<Category>('categories').valueChanges();
   }
 
   setSelectedCategory(category: Category): void {
@@ -70,49 +47,39 @@ export class CategoriesService {
     return this.selectCategory;
   }
 
-  private getCategories(): Map<number, Category> {
-    const categoriesString = localStorage.getItem(this.CATEGORIES_KEY);
-    return categoriesString
-      ? new Map<number, Category>(JSON.parse(categoriesString))
-      : new Map<number, Category>();
+  async fetchTranslatedWords(categoryId: string): Promise<TranslatedWord[]> {
+    const categoryRef = this.firestore.collection('categories').doc(categoryId);
+    const categorySnapshot = await categoryRef.get().toPromise();
+    if (categorySnapshot.exists) {
+      const categoryData = categorySnapshot.data() as Category;
+      return categoryData.words || []; // Return the words or an empty array if not present
+    }
+    return [];
   }
 
-  private getNextId(): number {
-    const nextIdString = localStorage.getItem(this.NEXT_ID_KEY);
-    return nextIdString ? parseInt(nextIdString) : 0;
+  get(id: string): Observable<Category | undefined> {
+    return this.firestore
+      .collection<Category>('categories')
+      .doc(id)
+      .valueChanges();
   }
 
-  private setCategories(list: Map<number, Category>): void {
-    localStorage.setItem(this.CATEGORIES_KEY, JSON.stringify(Array.from(list)));
+  delete(id: string): Promise<void> {
+    return this.firestore.collection('categories').doc(id).delete();
   }
 
-  private setNextId(id: number): void {
-    localStorage.setItem(this.NEXT_ID_KEY, id.toString());
+  update(category: Category): Promise<void> {
+    return this.firestore
+      .collection('categories')
+      .doc(category.id)
+      .update(category);
   }
 
-  get(id: number): Category | undefined {
-    return this.getCategories().get(id);
-  }
-
-  delete(id: number): void {
-    const categoriesMap = this.getCategories();
-    categoriesMap.delete(id);
-    this.setCategories(categoriesMap);
-  }
-
-  update(category: Category): void {
-    const categoriesMap = this.getCategories();
-    category.lastUpdateDate = new Date();
-    categoriesMap.set(category.id, category);
-    this.setCategories(categoriesMap);
-  }
-
-  add(category: Category): void {
-    category.id = this.getNextId();
-    category.lastUpdateDate = new Date();
-    const categoriesMap = this.getCategories();
-    categoriesMap.set(category.id, category);
-    this.setCategories(categoriesMap);
-    this.setNextId(++category.id);
+  add(category: Category): Promise<void> {
+    const id = this.firestore.createId();
+    return this.firestore
+      .collection('categories')
+      .doc(id)
+      .set({ ...category, id });
   }
 }

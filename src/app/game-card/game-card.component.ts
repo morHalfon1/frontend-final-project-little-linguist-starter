@@ -3,8 +3,8 @@ import { Component, Input, OnInit, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { GameProfile } from '../../shared/model/gameProfile';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { Game1Component } from '../game1/game1.component';
-import { Game2Component } from '../game2/game2.component';
+import { Game1Component } from '../mixedLettersGame/mixedLettersGame.component';
+import { Game2Component } from '../matchingWordsGame/matchingWordsGame.component';
 import { GameDialogComponent } from '../game-dialog/game-dialog.component';
 
 @Component({

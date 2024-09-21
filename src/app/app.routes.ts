@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { CategoriesListComponent } from './categories-list/categories-list.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
-import { Game1Component } from './game1/game1.component';
-import { Game2Component } from './game2/game2.component';
+import { Game1Component } from './mixedLettersGame/mixedLettersGame.component';
+import { Game2Component } from './matchingWordsGame/matchingWordsGame.component';
 import { HelpComponent } from './help/help.component';
 import { ChooseGameComponent } from './chooseGame/chooseGame.component';
 import { ExitDialogComponent } from './exit-dialog/exit-dialog.component';
@@ -10,9 +10,6 @@ import { DashBoardComponent } from './dashBoard/dashBoard.component';
 import { CorrectDialogComponent } from './correct-dialog/correct-dialog.component';
 import { FailureDialogComponent } from './failure-dialog/failure-dialog.component';
 import { FinalScreenComponent } from './final-screen/final-screen.component';
-
-
-
 
 export const routes: Routes = [
   { path: '', component: DashBoardComponent },

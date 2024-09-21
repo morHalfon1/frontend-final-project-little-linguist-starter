@@ -36,8 +36,8 @@ import { GamesService } from '../services/games.service';
     CorrectDialogComponent,
     FailureDialogComponent,
   ],
-  templateUrl: './game1.component.html',
-  styleUrls: ['./game1.component.css'],
+  templateUrl: './mixedLettersGame.component.html',
+  styleUrls: ['./mixedLettersGame.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Game1Component implements OnInit {
@@ -51,11 +51,9 @@ export class Game1Component implements OnInit {
   totalWords: number = 0;
   completeWords: number = 0;
   dialogRef: any;
-  wordResult :Wordfinal [] =[];
-  
+  wordResult: Wordfinal[] = [];
 
-  onInput(): void {
-  }
+  onInput(): void {}
 
   constructor(
     private categoriesService: CategoriesService,
@@ -106,7 +104,7 @@ export class Game1Component implements OnInit {
       .sort(() => 0.5 - Math.random())
       .join('');
   }
-  
+
   isButtonDisabled(): boolean {
     if (!this.currentWord?.guess) {
       return true; // Disable if the guess is empty
@@ -129,21 +127,17 @@ export class Game1Component implements OnInit {
 
     if (this.currentWord?.guess && this.currentWord.isMatch()) {
       this.dialogRef = this.dialog.open(CorrectDialogComponent);
-       isCorrect = true;
+      isCorrect = true;
       this.onCorrectAnswer();
-      
-      
     } else {
       this.dialogRef = this.dialog.open(FailureDialogComponent);
-      
-      
     }
-    if(this.currentWord)
-    this.wordResult.push({
-      hebrewWord: this.currentWord.origin,
-      englishWord: this.currentWord.target,
-      isCorrect: isCorrect
-    })
+    if (this.currentWord)
+      this.wordResult.push({
+        hebrewWord: this.currentWord.origin,
+        englishWord: this.currentWord.target,
+        isCorrect: isCorrect,
+      });
     this.resetGame();
   }
 
@@ -166,10 +160,7 @@ export class Game1Component implements OnInit {
   }
 
   finishGame(): void {
-    this.gamesService.setResults(this.wordResult); 
+    this.gamesService.setResults(this.wordResult);
     this.router.navigate(['/final-screen']);
-    
-    }
-  
-  
+  }
 }
