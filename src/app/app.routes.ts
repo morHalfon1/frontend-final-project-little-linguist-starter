@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { CategoriesListComponent } from './categories-list/categories-list.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
-import { Game1Component } from './mixedLettersGame/mixedLettersGame.component';
-import { Game2Component } from './matchingWordsGame/matchingWordsGame.component';
+import { mixedLettersGameComponent } from './mixedLettersGame/mixedLettersGame.component';
+import { MatchingWordsGameComponent } from './matchingWordsGame/matchingWordsGame.component';
 import { HelpComponent } from './help/help.component';
 import { ChooseGameComponent } from './chooseGame/chooseGame.component';
 import { ExitDialogComponent } from './exit-dialog/exit-dialog.component';
@@ -17,8 +17,8 @@ export const routes: Routes = [
   { path: 'category/:id', component: CategoryFormComponent },
   { path: 'newcategory', component: CategoryFormComponent },
   { path: 'choose-game', component: ChooseGameComponent },
-  { path: 'first-game', component: Game1Component },
-  { path: 'second-game', component: Game2Component },
+  { path: 'mixedLettersGame', component: mixedLettersGameComponent },
+  { path: 'MatchingWordsGameComponent', component: MatchingWordsGameComponent },
   { path: 'help', component: HelpComponent },
   { path: 'dashboard', component: DashBoardComponent },
   { path: 'Correct-Dialog', component: CorrectDialogComponent },

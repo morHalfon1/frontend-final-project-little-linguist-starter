@@ -1,6 +1,4 @@
-
-
-<div *ngFor="let game of games" class="game-card">
+<div *ngFor="let game of games$ | async">
     <app-game-card [currentGame]="game"></app-game-card>
-</div>
-
+  </div>
+  

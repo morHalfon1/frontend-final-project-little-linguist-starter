@@ -22,7 +22,7 @@ import { Wordfinal } from '../final-screen/final-screen.component';
 import { GamesService } from '../services/games.service';
 
 @Component({
-  selector: 'app-game1',
+  selector: 'app-game2',
   standalone: true,
   imports: [
     CommonModule,
@@ -40,7 +40,7 @@ import { GamesService } from '../services/games.service';
   styleUrls: ['./mixedLettersGame.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Game1Component implements OnInit {
+export class mixedLettersGameComponent implements OnInit {
   [x: string]: any;
   private allWords: TranslatedWord[] = [];
   selectCategory?: Category;
@@ -66,9 +66,12 @@ export class Game1Component implements OnInit {
     this.selectCategory = this.categoriesService.getSelectedCategory();
     console.log('Selected category in game:', this.selectCategory);
     if (this.selectCategory && this.selectCategory.words) {
-      this.allWords = [...this.selectCategory.words];
+      this.allWords = this.selectCategory.words.map(
+        (word) => new TranslatedWord(word.origin, word.target)
+      );
       this.totalWords = this.allWords.length;
     }
+
     this.loadWord();
   }
 
@@ -80,22 +83,23 @@ export class Game1Component implements OnInit {
       return;
     }
 
-    const selectedCategory = this.categoriesService.getSelectedCategory();
-    if (selectedCategory && selectedCategory.words) {
-      this.currentWord = this.getRandomWord();
-      if (this.currentWord) {
-        this.scrambledWord = this.scrambleWord(this.currentWord.target);
-      }
+    this.currentWord = this.getRandomWord();
+    console.log('Current Word:', this.currentWord);
+    console.log(
+      'Current Word Type:',
+      this.currentWord instanceof TranslatedWord
+    ); // Should be true
+
+    if (this.currentWord) {
+      this.scrambledWord = this.scrambleWord(this.currentWord.target);
     }
   }
-
   getRandomWord(): TranslatedWord {
     this.progress = 100 / this.totalWords;
     this.completeWords++;
     this.updateProgress();
     const randomIndex = Math.floor(Math.random() * this.allWords.length);
-    const selectedWord = this.allWords.splice(randomIndex, 1)[0];
-    return selectedWord;
+    return this.allWords.splice(randomIndex, 1)[0]; // Make sure this is a TranslatedWord
   }
 
   scrambleWord(word: string): string {
@@ -121,7 +125,16 @@ export class Game1Component implements OnInit {
 
   submitGuess(): void {
     let isCorrect = false;
+
+    // Debugging logs
     console.log('Current Word:', this.currentWord);
+    console.log(
+      'Current Word Type:',
+      this.currentWord instanceof TranslatedWord
+        ? 'TranslatedWord'
+        : 'Not TranslatedWord'
+    );
+    console.log('IsMatch function exists:', typeof this.currentWord?.isMatch);
     console.log('Guess:', this.currentWord?.guess);
     console.log('Target:', this.currentWord?.target);
 
@@ -132,12 +145,14 @@ export class Game1Component implements OnInit {
     } else {
       this.dialogRef = this.dialog.open(FailureDialogComponent);
     }
-    if (this.currentWord)
+
+    if (this.currentWord) {
       this.wordResult.push({
         hebrewWord: this.currentWord.origin,
         englishWord: this.currentWord.target,
         isCorrect: isCorrect,
       });
+    }
     this.resetGame();
   }
 

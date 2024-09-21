@@ -6,7 +6,6 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { GameProfile } from '../../shared/model/gameProfile';
-// import { DeleteCategoryDialogComponent } from '../delete-category-dialog/delete-category-dialog.component';
 import { Category } from '../../shared/model/category';
 import { CategoriesService } from '../services/categories.service';
 import { MatSelectModule } from '@angular/material/select';
@@ -16,11 +15,8 @@ import { ChooseGameComponent } from '../chooseGame/chooseGame.component';
 import { GameCardComponent } from '../game-card/game-card.component';
 import { MatDialogActions } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { categories } from '../../shared/data/categories';
-import { routes } from '../app.routes';
-import { Game1Component } from '../mixedLettersGame/mixedLettersGame.component';
-import { Game2Component } from '../matchingWordsGame/matchingWordsGame.component';
 import { Router } from '@angular/router';
+import { TranslatedWord } from '../../shared/model/translated-word';
 
 @Component({
   selector: 'app-game-dialog',
@@ -36,38 +32,57 @@ import { Router } from '@angular/router';
     MatDialogModule,
     MatButtonModule,
     MatDialogActions,
-    Game1Component,
-    Game2Component,
   ],
   templateUrl: './game-dialog.component.html',
-  styleUrl: './game-dialog.component.css',
+  styleUrls: ['./game-dialog.component.css'],
 })
 export class GameDialogComponent implements OnInit {
   categories: Category[] = [];
   selectCategory?: Category;
-  // router: any;
-  // selectedCategory: any;
+  words: TranslatedWord[] = []; // Local variable to hold the fetched words
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: GameProfile,
     private categoriesService: CategoriesService,
     private router: Router,
     private dialogRef: MatDialogRef<GameDialogComponent>
-  ) {
-    console.log(this.data);
-  }
+  ) {}
+
   ngOnInit(): void {
-    this.categories = this.categoriesService.list();
+    this.categoriesService.list().subscribe((categories: Category[]) => {
+      this.categories = categories;
+      console.log('Categories loaded:', this.categories);
+    });
   }
 
   onCategoryChange(category: Category): void {
     this.selectCategory = category;
     console.log('Selected category:', category);
+
+    // Fetch words for the selected category
+    this.categoriesService
+      .getWordsForCategory(category.id.toString())
+      .subscribe((words: TranslatedWord[]) => {
+        this.words = words;
+        console.log('Words in selected category:', this.words);
+
+        // Check if selectCategory is defined before assigning words
+        if (this.selectCategory) {
+          this.selectCategory.words = words; // Assign words to the selected category
+        }
+      });
+
     this.categoriesService.setSelectedCategory(this.selectCategory);
   }
 
   play(): void {
-    console.log(this.data.url);
-    this.dialogRef.close();
-    this.router.navigate([this.data.url]);
+    console.log('Play button clicked');
+    if (this.selectCategory) {
+      console.log('Navigating to:', this.data.url);
+      this.dialogRef.close();
+      this.router.navigate([this.data.url]);
+    } else {
+      console.log('No category selected');
+    }
   }
 }

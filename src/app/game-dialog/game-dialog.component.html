@@ -1,4 +1,3 @@
-
 <mat-dialog-content>
   <mat-form-field>
     <mat-label>Choose Category</mat-label>
@@ -8,10 +7,10 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  
+
   <div *ngIf="selectCategory">
     <p>Last Update Date:{{ selectCategory.lastUpdateDate | date }}</p>
-    <p>Number of Words:{{ selectCategory.words.length }}</p>
+    <p>Number of Words:{{ words.length }}</p>
   </div>
 </mat-dialog-content>
 
@@ -20,4 +19,3 @@
     Play
   </button>
 </mat-dialog-actions>
-

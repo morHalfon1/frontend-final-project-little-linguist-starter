@@ -7,11 +7,12 @@ import { CategoriesService } from '../services/categories.service';
   selector: 'app-game2',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './matchingWordsGame.component.html',
-  styleUrl: './matchingWordsGame.component.css',
+  templateUrl: './MatchingWordsGame.component.html',
+  styleUrl: './MatchingWordsGame.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Game2Component {
+
+export class MatchingWordsGameComponent {
   selectCategory?: Category;
 
   constructor(private categoriesService: CategoriesService) {}

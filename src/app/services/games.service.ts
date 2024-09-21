@@ -1,4 +1,10 @@
 import { Injectable } from '@angular/core';
+import {
+  Firestore,
+  collection,
+  collectionData,
+} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { GameProfile } from '../../shared/model/gameProfile';
 import { Wordfinal } from '../final-screen/final-screen.component';
 
@@ -6,26 +12,14 @@ import { Wordfinal } from '../final-screen/final-screen.component';
   providedIn: 'root',
 })
 export class GamesService {
-  private game: GameProfile[] = [
-    new GameProfile(
-      1,
-      'משחק מילים מבולגנות',
-      'עלייך לתרגם את המילים בעזרת המילים המבולגנות',
-      'first-game'
-    ),
-    new GameProfile(
-      2,
-      'משחק מיון מילים',
-      'עלייך למיין את המילים לפי הקטגוריה',
-      'second-game'
-    ),
-  ];
-  
   private wordResults: Wordfinal[] = [];
 
-  constructor() {}
-  list(): GameProfile[] {
-    return this.game;
+  constructor(private firestore: Firestore) {}
+
+  // Fetch games from Firestore
+  getGames(): Observable<GameProfile[]> {
+    const gamesCollection = collection(this.firestore, 'games'); // Accessing the 'games' collection
+    return collectionData(gamesCollection) as Observable<GameProfile[]>; // Type assertion to GameProfile[]
   }
 
   setResults(results: Wordfinal[]): void {

@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { GameProfile } from '../../shared/model/gameProfile';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { Game1Component } from '../mixedLettersGame/mixedLettersGame.component';
-import { Game2Component } from '../matchingWordsGame/matchingWordsGame.component';
 import { GameDialogComponent } from '../game-dialog/game-dialog.component';
 
 @Component({
@@ -12,19 +10,19 @@ import { GameDialogComponent } from '../game-dialog/game-dialog.component';
   standalone: true,
   imports: [CommonModule, MatCardModule, MatDialogModule],
   templateUrl: './game-card.component.html',
-  styleUrl: './game-card.component.css',
+  styleUrls: ['./game-card.component.css'], // Fixed styleUrl to styleUrls
 })
-export class GameCardComponent implements OnInit {
+export class GameCardComponent {
   dialog = inject(MatDialog);
-  ngOnInit(): void {}
+
   @Input()
-  currentGame!: GameProfile;
+  currentGame!: GameProfile; // Ensure this matches the expected input
 
   openDialog() {
     this.dialog.open(GameDialogComponent, {
       height: '500px',
       width: '500px',
-      data: this.currentGame,
+      data: this.currentGame, // This sends the current game data to the dialog
     });
   }
 }
