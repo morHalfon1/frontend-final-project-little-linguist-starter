@@ -1,3 +1,66 @@
 :host {
   display: block;
 }
+
+body {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  background-color: #FFF5E1;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 15px;
+  background-color: #FFDD57;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.dashboard h2 {
+  color: #FF6F61;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  background: linear-gradient(135deg, #FFDD57 0%, #FF5555 100%);
+  border-radius: 15px;
+  padding: 15px;
+  margin: 10px;
+  color: white;
+  font-size: 18px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: calc(33.33% - 20px); /* Ensures 3 cards fit in one row, accounting for margins */
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: calc(50% - 20px); /* Two cards per row on medium screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 100%; /* One card per row on small screens */
+    margin: 10px 0;
+  }
+
+  .dashboard h2 {
+    font-size: 24px;
+  }
+}

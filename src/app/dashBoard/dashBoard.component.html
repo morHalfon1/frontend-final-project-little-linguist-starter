@@ -1,1 +1,18 @@
-<p>dashBoard works!</p>,
+<div class="dashboard">
+    <h2>הלמידה שלך:</h2>
+    
+    <div class="card-container">
+      <div class="card">כמות נקודות: {{playerData.points}}</div>
+      <div class="card">כמות משחקים: {{playerData.gamesPlayed}}</div>
+      <div class="card">המשחק עם ציון ממוצע גבוה ביותר: {{playerData.highestScoreGame}}</div>
+      <div class="card">המשחק עם ציון ממוצע נמוך ביותר: {{playerData.lowestScoreGame}}</div>
+      <div class="card">כמות קטגוריות שנלמדו: {{playerData.categoriesLearned}}</div>
+      <div class="card">כמות קטגוריות שטרם נלמדו: {{playerData.categoriesNotLearned}}</div>
+      <div class="card">אחוז משחקים עם תוצאה מושלמת: {{playerData.perfectGamesPercentage}}%</div>
+      <div class="card">הקטגוריה ששוחקה הכי הרבה: {{playerData.mostPlayedCategory}}</div>
+      <div class="card">אחוז הקטגוריות שנלמדו: {{playerData.learnedCategoriesPercentage}}%</div>
+      <div class="card">משחקים החודש: {{playerData.gamesThisMonth}}</div>
+      <div class="card">Days Strike: {{playerData.daysStrike}}</div>
+    </div>
+  </div>
+  
