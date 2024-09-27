@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   async ngOnInit() {
     try {
       this.gameResults = await this.gameResultService.list();
-
+      console.log(this.gameResults);  
 
       this.totalGames = this.gameResults.length;
       this.totalPoints = this.gameResults.reduce((sum, result) => sum + result.points, 0);
