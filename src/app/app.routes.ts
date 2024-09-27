@@ -6,13 +6,13 @@ import { MatchingWordsGameComponent } from './matchingWordsGame/matchingWordsGam
 import { HelpComponent } from './help/help.component';
 import { ChooseGameComponent } from './chooseGame/chooseGame.component';
 import { ExitDialogComponent } from './exit-dialog/exit-dialog.component';
-import { DashBoardComponent } from './dashBoard/dashBoard.component';
+import { DashboardComponent } from './dashBoard/dashBoard.component';
 import { CorrectDialogComponent } from './correct-dialog/correct-dialog.component';
 import { FailureDialogComponent } from './failure-dialog/failure-dialog.component';
 import { FinalScreenComponent } from './final-screen/final-screen.component';
 
 export const routes: Routes = [
-  { path: '', component: DashBoardComponent },
+  { path: '', component: DashboardComponent },
   { path: 'categories', component: CategoriesListComponent },
   { path: 'category/:id', component: CategoryFormComponent },
   { path: 'newcategory', component: CategoryFormComponent },
@@ -20,7 +20,7 @@ export const routes: Routes = [
   { path: 'mixedLettersGame', component: mixedLettersGameComponent },
   { path: 'MatchingWordsGameComponent', component: MatchingWordsGameComponent },
   { path: 'help', component: HelpComponent },
-  { path: 'dashboard', component: DashBoardComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'Correct-Dialog', component: CorrectDialogComponent },
   { path: 'Failure-Dialog', component: FailureDialogComponent },
   { path: 'exit-dialog', component: ExitDialogComponent },

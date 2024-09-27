@@ -4,7 +4,7 @@ import { Category } from '../../shared/model/category';
 import { CategoriesService } from '../services/categories.service';
 
 @Component({
-  selector: 'app-game2',
+  selector: 'app-matching-word-game',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './matchingWordsGame.component.html',

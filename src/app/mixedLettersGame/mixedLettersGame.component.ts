@@ -22,7 +22,7 @@ import { Wordfinal } from '../final-screen/final-screen.component';
 import { GamesService } from '../services/games.service';
 
 @Component({
-  selector: 'app-game2',
+  selector: 'app-mixed-letters-game',
   standalone: true,
   imports: [
     CommonModule,
@@ -41,7 +41,7 @@ import { GamesService } from '../services/games.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class mixedLettersGameComponent implements OnInit {
-  [x: string]: any;
+  [x: string]: unknown;
   private allWords: TranslatedWord[] = [];
   selectCategory?: Category;
   currentWord?: TranslatedWord;
@@ -50,7 +50,7 @@ export class mixedLettersGameComponent implements OnInit {
   guess?: string = '';
   totalWords: number = 0;
   completeWords: number = 0;
-  dialogRef: any;
+  dialogRef: unknown;
   wordResult: Wordfinal[] = [];
 
   onInput(): void {}

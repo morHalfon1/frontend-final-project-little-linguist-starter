@@ -1,18 +1,38 @@
-<div class="dashboard">
-    <h2>הלמידה שלך:</h2>
-    
-    <div class="card-container">
-      <div class="card">כמות נקודות: {{playerData.points}}</div>
-      <div class="card">כמות משחקים: {{playerData.gamesPlayed}}</div>
-      <div class="card">המשחק עם ציון ממוצע גבוה ביותר: {{playerData.highestScoreGame}}</div>
-      <div class="card">המשחק עם ציון ממוצע נמוך ביותר: {{playerData.lowestScoreGame}}</div>
-      <div class="card">כמות קטגוריות שנלמדו: {{playerData.categoriesLearned}}</div>
-      <div class="card">כמות קטגוריות שטרם נלמדו: {{playerData.categoriesNotLearned}}</div>
-      <div class="card">אחוז משחקים עם תוצאה מושלמת: {{playerData.perfectGamesPercentage}}%</div>
-      <div class="card">הקטגוריה ששוחקה הכי הרבה: {{playerData.mostPlayedCategory}}</div>
-      <div class="card">אחוז הקטגוריות שנלמדו: {{playerData.learnedCategoriesPercentage}}%</div>
-      <div class="card">משחקים החודש: {{playerData.gamesThisMonth}}</div>
-      <div class="card">Days Strike: {{playerData.daysStrike}}</div>
-    </div>
+<div class="dashboard-container">
+  <div class="dashboard-card">
+    <h3>Points</h3>
+    <p>{{ totalPoints }}</p>
   </div>
-  
+  <div class="dashboard-card">
+    <h3>Games Played</h3>
+    <p>{{ totalGames }}</p>
+  </div>
+  <div class="dashboard-card">
+    <h3>Highest Score Game</h3>
+    <p>{{ highestScoreGameType }}</p>
+  </div>
+  <div class="dashboard-card">
+    <h3>Lowest Score Game</h3>
+    <p>{{ lowestScoreGameType }}</p>
+  </div>
+  <div class="dashboard-card">
+    <h3>Learned Categories</h3>
+    <p>{{ learnedCategoriesCount }}</p>
+  </div>
+  <div class="dashboard-card">
+    <h3>Not Learned Categories</h3>
+    <p>{{ notLearnedCategoriesCount }}</p>
+  </div>
+  <div class="dashboard-card">
+    <h3>Perfect Games Percentage</h3>
+    <p>{{ perfectGamesPercentage }}%</p>
+  </div>
+  <div class="dashboard-card">
+    <h3>Most Played Category</h3>
+    <p>{{ mostPlayedCategory }}</p>
+  </div>
+  <div class="dashboard-card">
+    <h3>Learned Categories Percentage</h3>
+    <p>{{ learnedCategoriesPercentage }}%</p>
+  </div>
+</div>
