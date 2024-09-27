@@ -1,0 +1,31 @@
+
+  <!-- <mat-card class="card-container">
+    <mat-card-header>
+      <mat-card-title>
+        <a (click)="openDialog()">{{ currentGame?.name }}</a>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ currentGame?.description }}</p>
+    </mat-card-content>
+  </mat-card> -->
+  
+  <mat-card class="card-container">
+    <mat-card-header>
+      <mat-card-title>
+        <a 
+          (click)="openDialog()" 
+          (keyup.enter)="openDialog()" 
+          (keydown)="openDialog()" 
+          tabindex="0"
+        >
+          {{ currentGame.name }}
+        </a>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ currentGame.description }}</p>
+    </mat-card-content>
+  </mat-card>
+  
+  

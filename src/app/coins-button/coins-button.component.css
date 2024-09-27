@@ -1,0 +1,15 @@
+ .coin-button {
+    display: flex;
+    align-items: center;
+    background-color: #ffd700; /* צבע זהב */
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  .coin-button mat-icon {
+    margin-right: 8px;
+    font-size: 24px;
+  } 
+  

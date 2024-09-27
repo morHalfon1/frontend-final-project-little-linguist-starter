@@ -1,0 +1,94 @@
+
+body {
+  font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun and playful font */
+  background-color: #FFF5E1; /* Soft light background color */
+  margin: 0;
+  padding: 0;
+}
+
+
+h1, h2 {
+  color: #FF6F61; /* Bright, friendly color */
+  text-align: center;
+}
+
+
+.exit, .coins {
+  position: absolute;
+  top: 70px;
+}
+
+.exit {
+  left: 20px;
+}
+
+.coins {
+  right: 20px;
+}
+
+/* Game Container */
+.game-container {
+  background-color: #FFFAE3; /* Light yellow background */
+  border-radius: 15px; /* Rounded corners for a friendly look */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  padding: 20px;
+  max-width: 500px;
+  margin: 50px auto; /* Centering the container */
+  text-align: center; /* Centered text */
+}
+
+/* Form Field */
+mat-form-field {
+  width: 100%; /* Full width for better spacing */
+  margin-top: 20px;
+}
+
+input[matInput] {
+  background-color: #FFEEAD; /* Soft pastel background */
+  border-radius: 10px; /* Rounded edges */
+  padding: 10px;
+  font-size: 18px;
+}
+
+/* Buttons */
+button[mat-raised-button] {
+  background-color: #FF6F61; 
+  color: #FFF; 
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #FF4F41; 
+}
+
+
+mat-progress-bar {
+  margin-top: 20px;
+  height: 20px; 
+  border-radius: 10px; 
+}
+
+
+.progress-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.progress-label {
+  width: 40px; /* Adjust width as needed */
+  text-align: center;
+  font-weight: bold;
+  color: black;
+}
+
+mat-progress-bar {
+  flex-grow: 1;
+  height: 20px; /* Adjust height as needed */
+  margin: 0 10px; /* Space between the labels and the progress bar */
+}

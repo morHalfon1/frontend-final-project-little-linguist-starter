@@ -1,0 +1,21 @@
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Choose Category</mat-label>
+    <mat-select (selectionChange)="onCategoryChange($event.value)">
+      <mat-option *ngFor="let category of categories" [value]="category">
+        {{ category.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div *ngIf="selectCategory">
+    <p>Last Update Date:{{ selectCategory.lastUpdateDate | date }}</p>
+    <p>Number of Words:{{ words.length }}</p>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button (click)="play()" [disabled]="!selectCategory">
+    Play
+  </button>
+</mat-dialog-actions>

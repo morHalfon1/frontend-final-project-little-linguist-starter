@@ -1,0 +1,43 @@
+
+body {
+  font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun, playful font */
+  background-color: #F5F5F5; /* Light background color */
+  margin: 0;
+  padding: 0;
+}
+
+mat-toolbar {
+  background-color: #FFDD57; /* Bright yellow background for toolbar */
+  color: #FFFFFF; /* White text color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  padding: 0 20px;
+}
+
+.title {
+  font-size: 24px;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+mat-icon {
+  color: #FFFFFF;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+mat-menu {
+  background-color: #FF5555; /* Red background for the menu */
+  color: #FFFFFF; /* White text color */
+}
+
+mat-menu button {
+  font-size: 18px;
+  color: #FFFFFF;
+}
+
+mat-menu button:hover {
+  background-color: #FFDD57; /* Yellow hover effect */
+}

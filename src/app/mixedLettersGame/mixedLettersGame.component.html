@@ -1,0 +1,43 @@
+<div class ="title">
+  <h1>משחק מילים מבולגנות</h1>
+</div>
+<div *ngIf="selectCategory">
+  <h1>Selected Category: {{ selectCategory.name }}</h1>
+</div>
+<div *ngIf="!selectCategory">
+  <h1>No Category Selected</h1>
+</div>
+<div class="exit">
+  <app-exit-button>logout</app-exit-button>
+</div>
+
+<div class="coins">
+  <app-coins-button>attach_money</app-coins-button>
+</div>
+
+<div class="game-container">
+ 
+  <h2>Translate the Hebrew word:</h2>
+  <p>{{ currentWord?.origin }}</p>
+  
+  <h2>Unscramble the English word:</h2>
+  <p>{{ scrambledWord }}</p>
+  
+  <mat-form-field *ngIf="currentWord">
+    <mat-label>Enter your guess</mat-label>
+    <input matInput [(ngModel)]="currentWord.guess" (input)="onInput()" />
+  </mat-form-field>
+  
+  <button mat-raised-button color="primary" (click)="resetGame()">
+    Reset
+  </button>
+  <button mat-raised-button color="primary" [disabled]="isButtonDisabled()" (click)="submitGuess()">
+    Submit
+  </button>
+  <div class="progress-container">
+    <div class="progress-label start">{{ completeWords }}</div>
+    <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+    <div class="progress-label end">{{ totalWords }}</div>
+  </div>
+
+  
