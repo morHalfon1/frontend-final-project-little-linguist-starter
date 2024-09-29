@@ -57,7 +57,7 @@ export class CategoriesService {
 
           // Pass the words array to the Category constructor
           return new Category(
-            +data.id,
+            data.id,
             data.name,
             origin,
             target,

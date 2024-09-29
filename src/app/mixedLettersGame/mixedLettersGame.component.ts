@@ -70,6 +70,7 @@ export class mixedLettersGameComponent implements OnInit {
         (word) => new TranslatedWord(word.origin, word.target)
       );
       this.totalWords = this.allWords.length;
+      this.gamesService.setSelectedCategoryId(this.selectCategory.id);
     }
 
     this.loadWord();
@@ -175,7 +176,26 @@ export class mixedLettersGameComponent implements OnInit {
   }
 
   finishGame(): void {
-    this.gamesService.setResults(this.wordResult);
-    this.router.navigate(['/final-screen']);
+    const points = this.coinButton.getPoints(); // הנח שיש לך פונקציה כזו לקבל את הניקוד
+    const categoryId = this.selectCategory?.id; // ודא שהקטגוריה נבחרה ומכילה id
+  
+    // בדוק אם categoryId קיים לפני השמירה
+    if (categoryId !== undefined) {
+      // שמירה של תוצאת המשחק ל-Firestore
+      this.gamesService.saveGameResult(categoryId, points)
+        .then(() => {
+          // שמירה על התוצאות לקומפוננטת הסיכום
+          this.gamesService.setResults(this.wordResult);
+          // מעבר לעמוד הסיכום
+          this.router.navigate(['/final-screen']);
+        })
+        .catch((error) => {
+          console.error("Error saving game result: ", error);
+          // במידה ויש בעיה, ניתן לשקול לעדכן את המשתמש
+        });
+    } else {
+      console.error("Category ID is undefined. Cannot save game result.");
+      // כאן תוכל להוסיף טיפול במקרה שאין ID
+    }
   }
-}
+  }  

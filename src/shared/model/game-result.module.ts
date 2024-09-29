@@ -3,7 +3,7 @@ export class GameResult {
   isLearned: unknown;
   constructor(
     public categoryId: string,
-    public gameId: string,
+    public gameId:number ,
     public date: Date,
     public points: number
   ) {}

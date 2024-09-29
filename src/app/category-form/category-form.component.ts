@@ -29,7 +29,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./category-form.component.css'],
 })
 export class CategoryFormComponent implements OnInit {
-  currentCategory = new Category(0, '', Language.English, Language.Hebrew);
+  currentCategory = new Category('', '', Language.English, Language.Hebrew);
   displayedColumns: string[] = ['Origin', 'Target', 'Actions'];
 
   @Input() id?: string;

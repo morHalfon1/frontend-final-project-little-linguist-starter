@@ -18,9 +18,10 @@ export class CoinsButtonComponent {
   addPoints(pointsToAdd: number): void {
     this.points += pointsToAdd;
   }
+  getPoints(): number {
+    return this.points;
 }
-
-
+}
 
 
  

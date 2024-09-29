@@ -50,7 +50,10 @@ export class FinalScreenComponent implements OnInit {
   // }
   
   ngOnInit(): void {
-    this.wordsFinal.data = this.gamesService.getResults();
+    const results = this.gamesService.getResults();
+  console.log('Loaded results:', results);
+  this.wordsFinal.data = results;
+
   }
   
   

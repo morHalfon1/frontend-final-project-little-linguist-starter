@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GameResultService } from '../services/game-result.service';
-import { GameResult} from '../services/game-result.service';
+import { GamesService } from '../services/games.service';
+import { GameResult } from '../../shared/model/game-result.module';
 
 @Component({
   selector: 'app-dash-board',
@@ -19,40 +19,44 @@ export class DashboardComponent implements OnInit {
   mostPlayedCategory: string = '';
   learnedCategoriesPercentage: number = 0;
 
-  constructor(private gameResultService: GameResultService) {}
-
-  async ngOnInit() {
-    try {
-      this.gameResults = await this.gameResultService.list();
-      console.log(this.gameResults);  
-
-      this.totalGames = this.gameResults.length;
-      this.totalPoints = this.gameResults.reduce((sum, result) => sum + result.points, 0);
-
-
-      const sortedGames = [...this.gameResults].sort((a, b) => b.points - a.points);
-      this.highestScoreGameType = sortedGames[0]?.gameType || '';
-      this.lowestScoreGameType = sortedGames[sortedGames.length - 1]?.gameType || '';
-
-
-      this.learnedCategoriesCount = this.gameResults.filter(result => result.isLearned).length;
-      this.notLearnedCategoriesCount = this.gameResults.length - this.learnedCategoriesCount;
-
-
-      this.perfectGamesPercentage = (this.gameResults.filter(result => result.points === 100).length / this.totalGames) * 100;
-
-
-      const categoryMap = new Map<string, number>();
-      this.gameResults.forEach(result => {
-        categoryMap.set(result.categoryId, (categoryMap.get(result.categoryId) || 0) + 1);
-      });
-      this.mostPlayedCategory = Array.from(categoryMap.entries()).reduce((max, entry) => entry[1] > max[1] ? entry : max)[0];
-
-
-      this.learnedCategoriesPercentage = (this.learnedCategoriesCount / this.gameResults.length) * 100;
-
-    } catch (error) {
-      console.error('Error fetching game results:', error);
-    }
+  constructor(private gameResultService: GamesService) {
+    console.log('DashboardComponent initialized'); 
+    console.log('Game results in dashboard:', this.gameResults);  
   }
+
+  ngOnInit() {
+    console.log('Some method called');
+
+    // הרשמה ל-Observable מהשירות
+    this.gameResultService.list().subscribe(
+        results => {
+            this.gameResults = results;
+            console.log('Game results in dashboard:', this.gameResults);
+
+            this.totalGames = this.gameResults.length;
+            this.totalPoints = this.gameResults.reduce((sum, result) => sum + result.points, 0);
+
+            const sortedGames = [...this.gameResults].sort((a, b) => b.points - a.points);
+            this.highestScoreGameType = sortedGames[0]?.gameType || '';
+            this.lowestScoreGameType = sortedGames[sortedGames.length - 1]?.gameType || '';
+
+            this.learnedCategoriesCount = this.gameResults.filter(result => result.isLearned).length;
+            this.notLearnedCategoriesCount = this.gameResults.length - this.learnedCategoriesCount;
+
+            this.perfectGamesPercentage = this.totalGames > 0 ? (this.gameResults.filter(result => result.points === 100).length / this.totalGames) * 100 : 0;
+
+            const categoryMap = new Map<string, number>();
+            this.gameResults.forEach(result => {
+                categoryMap.set(result.categoryId, (categoryMap.get(result.categoryId) || 0) + 1);
+            });
+            this.mostPlayedCategory = Array.from(categoryMap.entries()).reduce((max, entry) => entry[1] > max[1] ? entry : max)[0];
+
+            this.learnedCategoriesPercentage = this.totalGames > 0 ? (this.learnedCategoriesCount / this.totalGames) * 100 : 0;
+
+        },
+        error => {
+            console.error('Error fetching game results:', error);
+        }
+    );
+}
 }
