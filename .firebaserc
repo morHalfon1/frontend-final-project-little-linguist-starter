@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "little-linguist-mor-tal"
+    "default": "little-linguist-mor-tal",
+    "little-liguist": "little-linguist-mor-tal"
   },
   "targets": {},
   "etags": {},

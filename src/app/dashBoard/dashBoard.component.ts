@@ -36,9 +36,15 @@ export class DashboardComponent implements OnInit {
             this.totalGames = this.gameResults.length;
             this.totalPoints = this.gameResults.reduce((sum, result) => sum + result.points, 0);
 
-            const sortedGames = [...this.gameResults].sort((a, b) => b.points - a.points);
-            this.highestScoreGameType = sortedGames[0]?.gameType || '';
-            this.lowestScoreGameType = sortedGames[sortedGames.length - 1]?.gameType || '';
+            if (this.gameResults.length > 0) {
+    const sortedGames = [...this.gameResults].sort((a, b) => b.points - a.points);
+    this.highestScoreGameType = sortedGames[0].gameType || ''; // משחק עם הניקוד הגבוה ביותר
+    this.lowestScoreGameType = sortedGames[sortedGames.length - 1].gameType || ''; // משחק עם הניקוד הנמוך ביותר
+} else {
+    this.highestScoreGameType = ''; // אם אין משחקים
+    this.lowestScoreGameType = ''; // אם אין משחקים
+}
+
 
             this.learnedCategoriesCount = this.gameResults.filter(result => result.isLearned).length;
             this.notLearnedCategoriesCount = this.gameResults.length - this.learnedCategoriesCount;
